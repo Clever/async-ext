@@ -1,0 +1,1 @@
+describe 'async.lift', ->

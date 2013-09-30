@@ -1,0 +1,23 @@
+{
+  "name": "async-ext",
+  "version": "0.0.1",
+  "description": "Extensions to the async library",
+  "main": "async-ext.js",
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "repository": "git://github.com/Clever/async-ext.git",
+  "scripts": {
+    "prepublish": "make",
+    "test": "make test"
+  },
+  "license": "BSD",
+  "peerDependencies": {
+    "async": "0.2.x"
+  },
+  "devDependencies": {
+    "underscore": "~1.5.2",
+    "coffee-script": "~1.6.3",
+    "mocha": "~1.13.0"
+  }
+}
