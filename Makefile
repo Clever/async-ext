@@ -11,7 +11,7 @@ test: $(TESTS)
 
 $(TESTS): build
 	@echo $(LIBS)
-	node_modules/mocha/bin/mocha --bail --timeout 60000 --compilers coffee:coffee-script test/$@.coffee
+	node_modules/mocha/bin/mocha --bail --timeout 6000 --compilers coffee:coffee-script test/$@.coffee
 
 publish:
 	$(eval VERSION := $(shell grep version package.json | sed -ne 's/^[ ]*"version":[ ]*"\([0-9\.]*\)",/\1/p';))

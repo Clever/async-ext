@@ -16,16 +16,16 @@ module.exports =
 
   once: (f) ->
     saved = null
-    called = false
+    called_f = false
     cbs = []
     (args..., cb) -> 
       switch
-        when called and saved?
+        when called_f and saved?
           cb saved...
-        when called and not saved?
+        when called_f and not saved?
           cbs.push cb
-        when not called
-          called = true
+        when not called_f
+          called_f = true
           cbs.push cb
           f args..., (results...) ->
             saved = results
