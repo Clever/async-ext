@@ -2,7 +2,9 @@ module.exports =
 
   lift: (f) ->
     (args..., cb) -> setImmediate ->
-      [err, res...] = f args...
+      results = f args...
+      try [err, res...] = results
+      catch e then throw new Error 'async.lift expected function to return an array'
       cb err, res...
 
   do: (f) ->
