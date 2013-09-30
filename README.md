@@ -53,7 +53,7 @@ Some notes:
 - The error result may be null.
 - The resulting function will call its callback using `setImmediate`, to prevent [releasing the Zalgo](http://blog.izs.me/post/59142742143/designing-apis-for-asynchrony).
 
-### async.do(fun)
+### async.tap(fun)
 
 Lifts a synchronous function but ignores its return value, instead passing along whatever arguments it receives. This can be useful for inserting functions into pipelines when you only care about their side effects.
 
@@ -63,9 +63,9 @@ For example, we can insert some logging statements into our previous waterfall w
 async.waterfall [
     fetchData
     async.lift (data) -> transform data
-    async.do (data) -> console.log 'got some data', data
+    async.tap (data) -> console.log 'got some data', data
     sendData # is called with the same data as the logging function
-    async.do -> console.log 'done sending!'
+    async.tap -> console.log 'done sending!'
 ], errHandler
 ```
 
