@@ -11,6 +11,7 @@ describe 'async.tap', ->
     args = [1, 2, '3']
     fn = sinon.stub().returns [4, 5, '6']
     tapped = async.tap(fn)
-    tapped args..., (results...) ->
-      assert.deepEqual results, [null].concat args
+    tapped args..., (err, results...) ->
+      assert.ifError err
+      assert.deepEqual results, args
       done()

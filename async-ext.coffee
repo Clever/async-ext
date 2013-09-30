@@ -1,15 +1,17 @@
+_ = require 'underscore'
 module.exports =
 
   lift: (f) ->
     (args..., cb) -> setImmediate ->
-      results = f args...
-      try [err, res...] = results
-      catch e then throw new Error 'async.lift expected function to return an array'
-      cb err, res...
+      try results = f args...
+      catch e then return cb e
+      results = if _.isArray results then results else [results]
+      cb null, results...
 
   tap: (f) ->
     (args..., cb) -> setImmediate ->
-      f args...
+      try f args...
+      catch e then return cb e
       cb null, args...
 
   once: (f) ->
@@ -27,4 +29,4 @@ module.exports =
           cbs.push cb
           f args..., (results...) ->
             saved = results
-            cb results... for cb in cbs
+            _.each cbs, (cb) -> cb results...

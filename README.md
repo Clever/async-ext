@@ -28,11 +28,11 @@ Why would you ever want to make *more* functions async then you have to? Well, i
 async.waterfall [
     fetchData
     (data, cb) ->
-        [err, data] = transform data
-        if err?
-            setImmediate -> cb err
-        else
+        try 
+            data = transform data
             sendData data, cb
+        catch err
+            setImmediate -> cb err
 ], errHandler
 ```
 
@@ -46,12 +46,13 @@ async.waterfall [
 ], errHandler
 ```
 
-`async.lift` takes a synchronous function that returns an array where the first argument is an error and the rest of the arguments are results. It returns an asynchronous version of that function that applies its callback to the array returned by the original function.
+`async.lift` takes a synchronous function and returns an asynchronous version of that function that applies its callback to any results returned by the original function.
 
-Some notes:
-- The input function may accept any number of arguments - the resulting function will as well.
-- The error result may be null.
-- The resulting function will call its callback using `setImmediate`, to prevent [releasing the Zalgo](http://blog.izs.me/post/59142742143/designing-apis-for-asynchrony).
+The input function may accept any number of arguments - the resulting function will as well. If the input function returns a single value, the callback will be called with that value. If the input function returns an array, the callback will be applied to the array.
+
+Any errors thrown by the input function will be caught and passed to the callback. If no error is thrown, the callback will be called with `null` as the error argument.
+
+The resulting function will call its callback using `setImmediate`, to prevent [releasing the Zalgo](http://blog.izs.me/post/59142742143/designing-apis-for-asynchrony).
 
 ### async.tap(fun)
 
@@ -68,6 +69,8 @@ async.waterfall [
     async.tap -> console.log 'done sending!'
 ], errHandler
 ```
+
+Any errors thrown by the input function will be caught and passed to the callback. If no error is thrown, the callback will be called with `null` as the error argument.
 
 ### async.once(fun)
 
