@@ -26,7 +26,6 @@ module.exports =
           cbs.push cb
         when not called_f
           called_f = true
-          cbs.push cb
           f args..., (results...) ->
             saved = results
-            _.each cbs, (cb) -> cb results...
+            _.each [cb].concat(cbs), (cb) -> cb results...
