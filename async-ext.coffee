@@ -21,7 +21,7 @@ module.exports =
     (args..., cb) -> 
       switch
         when called_f and saved?
-          cb saved...
+          setImmediate -> cb saved...
         when called_f and not saved?
           cbs.push cb
         when not called_f

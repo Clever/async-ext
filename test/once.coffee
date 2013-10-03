@@ -40,7 +40,7 @@ describe 'async.once', ->
 
   it 'calls the callbacks from each invocation in order', (done) ->
     cnt = 0
-    fn = (cb) -> setTimeout (-> cnt += 1; cb()), 50
+    fn = (cb) -> setImmediate -> cnt += 1; cb()
     onced = async.once fn
     onced ->
       assert.equal cnt, 1
@@ -51,3 +51,17 @@ describe 'async.once', ->
     onced ->
       assert.equal cnt, 3
       done()
+
+  it 'calls the callbacks from nested invocations in order', (done) ->
+    cnt = 0
+    fn = (cb) -> setImmediate -> cnt += 1; cb()
+    onced = async.once fn
+    onced ->
+      assert.equal cnt, 1
+      cnt += 1
+      onced ->
+        assert.equal cnt, 3
+        done()
+    onced ->
+      assert.equal cnt, 2
+      cnt += 1
