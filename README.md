@@ -74,4 +74,19 @@ Any errors thrown by the input function will be caught and passed to the callbac
 
 ### async.once(fun)
 
-TODO
+Like `_.once`, takes an asynchronous function and returns a version of the function that will only run once. Subsequent calls to the function will call the given callback with the same results that were passed to the callback of the first invocation.
+
+If the function is called multiple times, the callbacks will be called in the order of the invocations.
+
+```coffeescript
+init_db = async.once(db.connect)
+init_db (err, conn1) ->
+    console.log 'inited 1'
+    init_db (err, conn2) ->
+        console.log 'inited 2'
+)
+init_db (err, connr3) ->
+    console.log 'inited 3'
+# logs 1, 3, 2
+# conn1 is conn2 is conn3
+```
