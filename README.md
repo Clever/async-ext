@@ -90,3 +90,15 @@ init_db (err, connr3) ->
 # logs 1, 3, 2
 # conn1 is conn2 is conn3
 ```
+
+### async.mapValues(obj, fun, cb)
+
+Takes an object, an async function, and a final callback. `async.mapValues` creates a new object whose values are the results of applying the function to each key/value pair of the original object. The resulting object is passed to the final callback.
+
+If the function calls its callback with an error, it will short-circuit the computation and pass the error to the final callback.
+
+```coffeescript
+photo_obj = { file1: 'some-file.txt', file2: 'another-file.txt' }
+async.mapValues photo_obj, fs.readFile, (err, res) ->
+    console.log res # { file: <some-file data>, file2: <another-file data> }
+```
