@@ -1,6 +1,6 @@
 {
   "name": "async-ext",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Extensions to the Node.js async library",
   "main": "async-ext.js",
   "engines": {
