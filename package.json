@@ -16,12 +16,12 @@
     "underscore": "~1.5.2"
   },
   "peerDependencies": {
-    "async": "0.2.x"
+    "async": "0.1.x"
   },
   "devDependencies": {
     "coffee-script": "~1.6.3",
     "sinon": "~1.7.3",
     "mocha": "~1.13.0",
-    "async": "~0.2.9"
+    "async": "~0.1.x"
   }
 }
