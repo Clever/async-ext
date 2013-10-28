@@ -16,7 +16,7 @@
     "underscore": "~1.5.2"
   },
   "peerDependencies": {
-    "async": "0.1.x"
+    "async": ">=0.1.x"
   },
   "devDependencies": {
     "coffee-script": "~1.6.3",
