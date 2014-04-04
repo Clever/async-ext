@@ -9,11 +9,7 @@ module.exports =
     (args..., cb) -> setImmediate ->
       try results = f args...
       catch e then return cb e
-      results = switch
-        when _.isArray results then results
-        when _.isUndefined results then []
-        else [results]
-      cb null, results...
+      if _.isUndefined results then cb() else cb null, results
 
   tap: (f) ->
     (args..., cb) -> setImmediate ->
