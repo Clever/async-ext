@@ -33,6 +33,9 @@ module.exports =
             saved = results
             _.each [cb].concat(cbs), (cb) -> cb results...
 
+  if: (condition, then_fn, else_fn, cb) ->
+    (if condition then then_fn else else_fn) cb
+
   mapValues: (obj, f, cb) ->
     tasks = _.mapValues obj, (val, key) -> (cb_p) -> f val, key, cb_p
     async.parallel tasks, (err, res) -> cb err, (res unless err?)
