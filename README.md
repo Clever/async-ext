@@ -91,6 +91,24 @@ init_db (err, connr3) ->
 # conn1 is conn2 is conn3
 ```
 
+### async.if(condition, then_fn, else_fn, cb)
+
+Takes a condition, two functions, and a callback. If the condition evaluates to true, `then_fn` will be called, else `else_fn` will be. Both will be given `cb` as a callback. This allows you to define the callback at the same time as the functions, improving readability.
+
+```coffeescript
+# without async.if
+cb = (output) -> console.log output
+if val > 10
+  then_fn val, cb
+else
+  else_fn val, cb
+# with async.if
+async.if val > 10,
+  (cb) -> then_fn(val, cb),
+  (cb) -> else_fn(val, cb),
+  (output) -> console.log output
+```
+
 ### async.mapValues(obj, fun, cb)
 
 Takes an object, an async function, and a final callback. `async.mapValues` creates a new object whose values are the results of applying the function to each key/value pair of the original object. The resulting object is passed to the final callback.
