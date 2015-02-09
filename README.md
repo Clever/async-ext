@@ -91,6 +91,20 @@ init_db (err, connr3) ->
 # conn1 is conn2 is conn3
 ```
 
+### async.withTimeout(timeout, fun)
+
+Takes a timeout (in milliseconds) and an asynchronous function and returns a version of the function that will error if the function doesn't finish computation before the timeout elapses.
+
+```coffeescript
+health_check = (db, cb) ->
+    ping = async.withTimeout 2000, db.ping
+    ping cb
+health_check db, (err) ->
+    console.error err
+# Assuming the db doesn't respond to the ping within 2 seconds...
+# logs "[Error: A function wrapped with async.withTimeout timed out after 2000ms]"
+```
+
 ### async.if(condition, then_fn, else_fn, cb)
 
 Takes a condition, two functions, and a callback. If the condition evaluates to true, `then_fn` will be called, else `else_fn` will be. Both will be given `cb` as a callback. This allows you to define the callback at the same time as the functions, improving readability.

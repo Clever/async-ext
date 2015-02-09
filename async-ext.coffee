@@ -33,6 +33,12 @@ module.exports =
             saved = results
             _.each [cb].concat(cbs), (cb) -> cb results...
 
+  withTimeout: (timeout, f) ->
+    (args..., cb) ->
+      cb = _.once cb
+      setTimeout (-> cb new Error "A function wrapped by async.withTimeout timed out after #{timeout}ms"), timeout
+      f args..., cb
+
   if: (condition, then_fn, else_fn, cb) ->
     (if condition then then_fn else else_fn) cb
 
