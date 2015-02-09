@@ -7,7 +7,10 @@ build: async-ext.js
 async-ext.js: async-ext.coffee
 	node_modules/coffee-script/bin/coffee --bare -c async-ext.coffee
 
-test: $(TESTS)
+lint:
+	./node_modules/.bin/lint
+
+test: $(TESTS) lint
 
 $(TESTS): build
 	@echo $(LIBS)

@@ -19,9 +19,10 @@
     "async": ">=0.1.x"
   },
   "devDependencies": {
+    "async": "~0.1.x",
+    "clever-coffeescript-style-guide": "^0.2.0",
     "coffee-script": "~1.6.3",
-    "sinon": "~1.7.3",
     "mocha": "~1.13.0",
-    "async": "~0.1.x"
+    "sinon": "~1.7.3"
   }
 }
