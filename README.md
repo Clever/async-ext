@@ -134,3 +134,4 @@ photo_obj = { file1: 'some-file.txt', file2: 'another-file.txt' }
 async.mapValues photo_obj, fs.readFile, (err, res) ->
     console.log res # { file: <some-file data>, file2: <another-file data> }
 ```
+test
