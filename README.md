@@ -6,7 +6,6 @@ This module consists of a set of functions to extend the capabilities of the Nod
 
     npm install async
     npm install async-ext
-
 ## Usage
 
 The easiest way to use async-ext is to extend the async object with the new functions. Here's how you might do it with Underscore:
