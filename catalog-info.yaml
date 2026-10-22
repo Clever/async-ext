@@ -3,9 +3,9 @@ kind: Component
 metadata:
   name: async-ext
   description: Extensions to the Node.js async library
-  owner: unknown
+  owner: eng-infra
 spec:
   type: unknown
   lifecycle: production
-  owner: unknown
+  owner: eng-infra
   system: Clever
